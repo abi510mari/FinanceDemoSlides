@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Web Presentation Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Reveal.js の読み込み（CDN） -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/white.css" id="theme">
+
+  <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- スライド1 -->
+      <section>
+        <h1>Functional Slide Design</h1>
+        <p>PowerPointからWebへ — 新しい資料表現へ</p>
+      </section>
+
+      <!-- スライド2 -->
+      <section>
+        <h2>狙い</h2>
+        <ul>
+          <li>アニメーションで情報を段階的に提示</li>
+          <li>閲覧者に“流れ”を感じさせる</li>
+          <li>ブラウザで簡単に共有できる</li>
+        </ul>
+      </section>
+
+      <!-- スライド3 -->
+      <section>
+        <h2>サンプル動作</h2>
+        <p>→キーを押して次へ進んでください</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    Reveal.initialize({
+      transition: 'fade', // スライド切り替え効果
+      slideNumber: true, // スライド番号を表示
+      hash: true // URLにスライド番号を反映（共有用）
+    });
+  </script>
+</body>
+</html>
