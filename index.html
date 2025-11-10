@@ -2,49 +2,108 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>Web Presentation Demo</title>
+  <title>金融業界デモプレゼン</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Reveal.js の読み込み（CDN） -->
+  <!-- Reveal.js -->
   <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css">
   <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/white.css" id="theme">
-
   <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Lottie -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
 
-      <!-- スライド1 -->
+ <!-- スライド1：会社紹介（背景画像つき） -->
+<section data-background-image="images/slide1_bg.png" data-background-size="cover">
+  <div style="background-color: rgba(255,255,255,0.7); padding: 40px; border-radius: 20px;">
+    <h1>Williams Lea Japanのご紹介</h1>
+    <p class="fragment">200年以上の歴史を持つグローバルBPOカンパニー</p>
+    <p class="fragment">BPO(Business Process Outsourcing)とは、企業の業務を外部に一括委託する仕組みです。</p>
+    <p class="fragment">高い専門性をもとに、メガバンク・大手証券・法律事務所・保険会社を支援しています。</p>
+    <p class="fragment">グローバルネットワークを活かし、ビジネスを支えるパートナーとして成長を続けています。</p>
+  </div>
+</section>
+
+      <!-- スライド2：市場動向（グラフ） -->
       <section>
-        <h1>Functional Slide Design</h1>
-        <p>PowerPointからWebへ — 新しい資料表現へ</p>
+        <h2>市場動向</h2>
+        <canvas id="marketChart" width="600" height="400"></canvas>
       </section>
 
-      <!-- スライド2 -->
+      <!-- スライド3：組織図 -->
       <section>
-        <h2>狙い</h2>
+        <h2>組織体制</h2>
+        <div class="org-chart">
+          <div class="org-node ceo">CEO</div>
+          <div class="org-branch">
+            <div class="org-node">営業部</div>
+            <div class="org-node">リスク管理部</div>
+            <div class="org-node">IT戦略部</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- スライド4：まとめ -->
+      <section>
+        <h2>まとめ</h2>
         <ul>
-          <li>アニメーションで情報を段階的に提示</li>
-          <li>閲覧者に“流れ”を感じさせる</li>
-          <li>ブラウザで簡単に共有できる</li>
+          <li>成長市場における新しい金融戦略</li>
+          <li>テクノロジー×信頼性の両立</li>
+          <li>Williams Lea Japanの支援体制</li>
         </ul>
-      </section>
-
-      <!-- スライド3 -->
-      <section>
-        <h2>サンプル動作</h2>
-        <p>→キーを押して次へ進んでください</p>
       </section>
 
     </div>
   </div>
 
   <script>
+    // Reveal.js初期化
     Reveal.initialize({
-      transition: 'fade', // スライド切り替え効果
-      slideNumber: true, // スライド番号を表示
-      hash: true // URLにスライド番号を反映（共有用）
+      transition: 'slide',
+      slideNumber: true,
+      hash: true
+    });
+
+    // Chart.js グラフ生成
+    Reveal.on('slidechanged', event => {
+      if (event.currentSlide.querySelector('#marketChart')) {
+        const ctx = document.getElementById('marketChart');
+        if (!ctx.dataset.loaded) {
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['2020', '2021', '2022', '2023', '2024'],
+              datasets: [{
+                label: '業界売上推移（兆円）',
+                data: [14, 16, 18, 22, 25],
+                borderColor: '#004C97',
+                fill: false,
+                tension: 0.3
+              }]
+            },
+            options: { responsive: false }
+          });
+          ctx.dataset.loaded = true;
+        }
+      }
+    });
+
+    // Lottieアニメーション再生
+    const animation = lottie.loadAnimation({
+      container: document.getElementById('lottie-container'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: 'animations/growth.json' // Lottie JSONファイル
     });
   </script>
 </body>
